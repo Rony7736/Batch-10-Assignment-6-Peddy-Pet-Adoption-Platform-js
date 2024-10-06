@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+
+  <!--  CDN link DaisyUI and Tailwind css -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/dcb6fa8a47.js" crossorigin="anonymous"></script>
+
+  <style>
+    .font-lato {
+      font-family: "Lato", sans-serif;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+            'legal-primary': '#B68C5A'
+          },
+        },
+      },
+    }
+  </script>
+
+</head>
+
+<body class="font-lato">
+
+  <header class="w-11/12 mx-auto">
+    <!-- Nav Section -->
+      <section>
+        <nav class="w-11/12 mx-auto py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b">
+
+          <div class="flex items-center gap-2 w-[100px]">
+              <img src="./images/logo.webp" alt="">
+              <h4 class="font-extrabold text-2xl">Peddy</h4>
+          </div>
+
+          <div class="">
+              <ul class="flex items-center gap-12">
+                <li><a href="">Home</a></li>
+                <li><a href="">Shop</a></li>
+                <li><a href="">Contact</a></li>
+              </ul>
+          </div>
+              
+          <div class="sort border p-4 rounded-full">
+              <img class= "w-8 h-8" src="https://img.icons8.com/?size=32&id=22396&format=png" alt="">
+          </div>
+
+      </nav>
+      </section>
+
+    
+
+  <footer class="w-11/12 mx-auto">
+
+  </footer>
+
+</body>
+
+</html>
