@@ -24,6 +24,11 @@
     .font-lato {
       font-family: "Lato", sans-serif;
     }
+
+    .active{
+      background-color: #E6F1F2;
+      border: 2px solid #46999E;
+    }
   </style>
 
   <script>
@@ -77,7 +82,7 @@
             <h1 class="lg:w-6/12  text-5xl lg:text-7xl font-extrabold lg:mb-8">Your Path to Adoption Starts Here</h1>
             <p class="lg:w-7/12 mx-6">Cats are incredible! They make great pets, especially for people who are home a lot and can therefore spend a lot of time with their cat. Whilst they are more independent than dogs, cats do still need a lot of care and attention and this should not be underestimated. Cats love to spend time with their humans and being home alone all day is not a very exciting life for them.</p>
 
-            <p><button onclick ="loadDetails()" class="btn bg-[#0E7A81] w-32 text-white text-sm">View More</button></p>
+            <p><button class="btn bg-[#0E7A81] w-32 text-white text-sm">View More</button></p>
             <div>
               <img src="./images/pet.webp" alt="">
             </div>
@@ -97,25 +102,28 @@
       </div>
 
       <!-- 4 card section -->
-      <div id="categoryButtons" class="flex flex-col lg:flex-row lg:justify-evenly gap-5">
+      <div id="categoryButtons" class="flex flex-col mx-24 lg:mx-0 lg:flex-row lg:justify-evenly gap-5">
 
       </div>
 
       <div class="flex justify-between items-center my-12"> 
         <h4 class="font-extrabold text-xl">Best Deal For you</h4>
-        <p><button onclick ="" class="btn bg-[#0E7A81] w-32 text-white text-sm">Sort by Price</button></p>
+        <p><button class="btn bg-[#0E7A81] w-32 text-white text-sm">Sort by Price</button></p>
       </div>
 
     </section>
 
     <section id="" class="flex flex-col lg:flex-row gap-6">
 
-      <div id="grid-Card-1" class="border border-red-500 lg:w-8/12 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-5 py-6 ">
+      <div id="grid-Card-1" class="lg:w-8/12 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-5 py-6 ">
 
       </div>
 
-      <div class="border border-green-500 w-4/12 h-56 mx-auto">
+      <div class="lg:w-4/12 h-full] card shadow-xl border py-6 px-6 mt-6 mb-6">
+        <div id="grid-Card-2" class="grid grid-cols-2 gap-4 mx-auto ">
 
+
+        </div>
       </div>
 
     </section>
