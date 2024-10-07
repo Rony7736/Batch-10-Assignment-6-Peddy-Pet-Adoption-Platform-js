@@ -44,14 +44,6 @@ const loadCategory = async(id) => {
 
 // step 2
 
-// const obj = {
-//     "id": 1,
-//     "category": "Cat",
-//     "category_icon": "https://i.ibb.co.com/N7dM2K1/cat.png"
-// }
-
-// create display categories
-
 const displayCategories = (categories) => {
     const categoryButtons = document.getElementById('categoryButtons')
 
@@ -113,14 +105,63 @@ const loadPetDetails = async (petId) => {
         detailsContainer.append(div)
     }
 
-    // step 8
+    // step 8 pet modals
 
     const loadmodal = async (petId) => {
-    
+
         const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
         const data = await res.json()
-        displayDetails(data);
+        displayModals(data.petData);
     }
+
+
+
+    // step 9 pet modals
+
+    const displayModals = (petModal) => {
+        console.log(petModal);
+
+        const detailsContainer = document.getElementById('modal-content')
+
+        detailsContainer.innerHTML = `
+
+            <img class="rounded-xl w-[600px] object-cover p-4" src="${petModal.image}">
+
+            <h2 class="card-title text-xl font-extrabold mb-6">${petModal.pet_name}</h2>
+
+            <div class="flex gap-6 mb-6 ">
+
+                    <div>
+                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=2905&format=png"><p>Breed : ${ petModal.breed ? petModal.breed : 'Not Available' }</p></span>
+
+                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>Birth : ${ petModal.date_of_birth ? petModal.date_of_birth : 'Not Available'}</p></span>
+
+                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>vaccinated status : ${ petModal.vaccinated_status ? petModal.vaccinated_status : 'Not Available'}</p></span>
+                    </div>
+                   
+                    <div>
+                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=6vWA99ikHpCe&format=png"><p>Gender : ${ petModal.gender ?  petModal.gender : 'Not Available'}</p></span>
+
+                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=85782&format=png"><p>Price : ${ petModal.price ? petModal.price + "$": 'Not Available'}</p></span> 
+                    </div>
+
+                </div> 
+
+                <h3 class="border-t pt-4 mb-4 text-lg font-bold">Details Information</h3>
+                <p class="">${petModal.pet_details}</p>
+
+
+        `
+
+
+        const showModal = document.getElementById('customModal').showModal()
+    }
+
+
+
+
+
+
 
 // step 4
 
@@ -187,7 +228,6 @@ const displayAllPets = (allPets) => {
 
                     <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=85782&format=png"><p>Price : ${ pet.price ? pet.price + "$": 'Not Available'}</p></span> 
 
-
                 </div>              
                 
                 <div class="flex justify-between items-center gap-3 border-t">
@@ -196,11 +236,11 @@ const displayAllPets = (allPets) => {
                     </div>
 
                     <div class="card-actions ">
-                        <button onclick="loadmodal('${pet.petId}')" class="px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                        <button class="px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
                     </div>
 
                     <div class="card-actions ">
-                        <button class="px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
+                        <button onclick="loadmodal('${pet.petId}')" class="px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
                     </div>
 
                 </div>
