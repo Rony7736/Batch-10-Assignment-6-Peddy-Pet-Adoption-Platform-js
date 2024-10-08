@@ -1,4 +1,17 @@
 
+// loading Speaner
+
+// const loadingSpeaner = () => {
+//     document.getElementById('spinner').classList.remove('hidden')
+
+//     setTimeout(() => {
+//         controlAllCard()
+//     }, 2000)
+// }
+
+// loadingSpeaner()
+
+
 // fetch load category button
 
 //step 1
@@ -20,27 +33,6 @@ const removeActiveClass = () => {
     
 }
 
-// step 5
-const loadCategory = async(id) => {
-
-    
-    // const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    // const data = await res.json();
-    // displayAllPets(data.data);
-
-    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    .then(res => res.json())
-    .then(data => {
-        removeActiveClass()
-
-        const activeBtn = document.getElementById(`button-${id}`)
-        activeBtn.classList.add('active')
-        
-        displayAllPets(data.data)
-    })
-    .catch((error) => console.log(error))
-    
-}
 
 // step 2
 
@@ -66,8 +58,31 @@ const displayCategories = (categories) => {
         categoryButtons.append(button)
 
     })
-
 }
+
+
+// step 5
+const loadCategory = async(id) => {
+
+    
+    // const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    // const data = await res.json();
+    // displayAllPets(data.data);
+
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then(res => res.json())
+    .then(data => {
+        removeActiveClass()
+
+        const activeBtn = document.getElementById(`button-${id}`)
+        activeBtn.classList.add('active')
+        
+        displayAllPets(data.data)
+    })
+    .catch((error) => console.log(error))
+    
+}
+
 
 
 // step 3
@@ -78,88 +93,6 @@ const loadAllPets = async() => {
     const data = await res.json();
     displayAllPets(data.pets);
 }
-
-// step 6
-
-const loadPetDetails = async (petId) => {
-    
-    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
-    const data = await res.json()
-    displayDetails(data);
-    
-}
-
-// step 7
-
-    const displayDetails = (pets) => {
-        console.log(pets.petData);
-        const detailsContainer = document.getElementById('grid-Card-2')
-        
-        const div = document.createElement('div')
-
-        div.innerHTML = `
-        
-            <img class="rounded-xl border p-4" src="${pets.petData.image}">
-
-        `
-        detailsContainer.append(div)
-    }
-
-    // step 8 pet modals
-
-    const loadmodal = async (petId) => {
-
-        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
-        const data = await res.json()
-        displayModals(data.petData);
-    }
-
-
-
-    // step 9 pet modals
-
-    const displayModals = (petModal) => {
-        console.log(petModal);
-
-        const detailsContainer = document.getElementById('modal-content')
-
-        detailsContainer.innerHTML = `
-
-            <img class="rounded-xl w-[600px] object-cover p-4" src="${petModal.image}">
-
-            <h2 class="card-title text-xl font-extrabold mb-6">${petModal.pet_name}</h2>
-
-            <div class="flex gap-6 mb-6 ">
-
-                    <div>
-                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=2905&format=png"><p>Breed : ${ petModal.breed ? petModal.breed : 'Not Available' }</p></span>
-
-                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>Birth : ${ petModal.date_of_birth ? petModal.date_of_birth : 'Not Available'}</p></span>
-
-                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>vaccinated status : ${ petModal.vaccinated_status ? petModal.vaccinated_status : 'Not Available'}</p></span>
-                    </div>
-                   
-                    <div>
-                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=6vWA99ikHpCe&format=png"><p>Gender : ${ petModal.gender ?  petModal.gender : 'Not Available'}</p></span>
-
-                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=85782&format=png"><p>Price : ${ petModal.price ? petModal.price + "$": 'Not Available'}</p></span> 
-                    </div>
-
-                </div> 
-
-                <h3 class="border-t pt-4 mb-4 text-lg font-bold">Details Information</h3>
-                <p class="">${petModal.pet_details}</p>
-
-
-        `
-
-
-        const showModal = document.getElementById('customModal').showModal()
-    }
-
-
-
-
 
 
 
@@ -232,15 +165,15 @@ const displayAllPets = (allPets) => {
                 
                 <div class="flex justify-between items-center gap-3 border-t">
                     <div class="card-actions ">
-                        <button onclick="loadPetDetails('${pet.petId}')" class=" mt-3 px-4 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
+                        <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-4 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
                     </div>
 
                     <div class="card-actions ">
-                        <button class="px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                        <button onclick="adoptModal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
                     </div>
 
                     <div class="card-actions ">
-                        <button onclick="loadmodal('${pet.petId}')" class="px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
+                        <button onclick="loadmodal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
                     </div>
 
                 </div>
@@ -255,6 +188,138 @@ const displayAllPets = (allPets) => {
 }
 
 
+
+// step 6
+
+const loadPetDetails = async (petId) => {
+    
+    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+    const data = await res.json()
+    displayDetails(data);
+    
+}
+
+// step 7
+
+    const displayDetails = (pets) => {
+        console.log(pets.petData);
+        const detailsContainer = document.getElementById('grid-Card-2')
+        
+        const div = document.createElement('div')
+
+        div.innerHTML = `
+        
+            <img class="rounded-xl border p-4" src="${pets.petData.image}">
+
+        `
+        detailsContainer.append(div)
+    }
+
+    // step 8 pet modals
+
+    const loadmodal = async (petId) => {
+
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+        const data = await res.json()
+        displayModals(data.petData);
+    }
+
+
+
+    // step 9 pet modals
+
+    const displayModals = (petModal) => {
+
+        const detailsContainer = document.getElementById('modal-content')
+
+        detailsContainer.innerHTML = `
+
+            <img class="rounded-xl w-[600px] object-cover p-4" src="${petModal.image}">
+
+            <h2 class="card-title text-xl font-extrabold mb-6">${petModal.pet_name}</h2>
+
+            <div class="flex gap-6 mb-6 ">
+
+                    <div>
+                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=2905&format=png"><p>Breed : ${ petModal.breed ? petModal.breed : 'Not Available' }</p></span>
+
+                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>Birth : ${ petModal.date_of_birth ? petModal.date_of_birth : 'Not Available'}</p></span>
+
+                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>vaccinated status : ${ petModal.vaccinated_status ? petModal.vaccinated_status : 'Not Available'}</p></span>
+                    </div>
+                   
+                    <div>
+                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=6vWA99ikHpCe&format=png"><p>Gender : ${ petModal.gender ?  petModal.gender : 'Not Available'}</p></span>
+
+                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=85782&format=png"><p>Price : ${ petModal.price ? petModal.price + "$": 'Not Available'}</p></span> 
+                    </div>
+
+                </div> 
+
+                <h3 class="border-t pt-4 mb-4 text-lg font-bold">Details Information</h3>
+                <p class="">${petModal.pet_details}</p>
+
+        `
+        
+        const showModal = document.getElementById('customModal').showModal()
+    }
+
+
+
+    // step 10
+
+    const adoptModal = async (petId) => {
+
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+        const data = await res.json()
+        displayAdoptModals(data.petData);
+    }
+
+
+    // // step 11
+
+    const displayAdoptModals = (petModal) => {
+        // let countdown = 4; 
+        console.log(petModal);
+
+          const adoptContainer = document.getElementById('adopt-modal-content')
+          
+        adoptContainer.innerHTML = `
+
+            <div class=" flex flex-col justify-center items-center mb-6">
+
+                <img class="flex justify-center" src="./images/logo.png">
+                <h2 class="text-center text-4xl font-extrabold py-6">Congrates</h2>
+                <p class="text-center">Adoption Process is Start For your pet</p>
+
+                <p id="countId" class="text-3xl font-black pt-8"></p>
+
+            </div> 
+
+        `
+
+        const showModal = document.getElementById('adoptModal').showModal()
+
+        let countdown = 4; 
+        const intervalId = setInterval(() => {
+            countdown --;
+            console.log(countdown);
+            const countId = document.getElementById('countId').innerText = countdown
+            console.log(countId);
+            
+    
+            if(countdown <= 0){
+                clearInterval(intervalId);
+                document.getElementById('adoptModal').close()
+                return;
+            }
+          }, 1000);
+
+    }
+
+   
+
+
 loadCategories ()
 
 loadAllPets()
@@ -262,8 +327,27 @@ loadAllPets()
 
 
 
-//  <span class="flex items-center gap-3 mt-2">
-//                         <img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png">        
-//                         <p>Birth : ${pet.date_of_birth?.length === 0 ? "" : `${ pet.date_of_birth}`}</p>   
-                        
-//                     </span>
+
+
+
+// intervalId = setInterval(() => {
+//     counter++;
+//     timerElement.innerText = `Timer: ${counter}`;
+//   }, 1000); // Update every second
+
+
+//     // Function to close the modal and clear the interval
+//     closeModalBtn.onclick = function() {
+//         modal.style.display = "none"; // Hide the modal
+
+//         // Clear the interval to stop the timer
+//         clearInterval(intervalId);
+//     }
+
+//     // Close the modal when clicking outside of it
+//     window.onclick = function(event) {
+//         if (event.target === modal) {
+//         modal.style.display = "none";
+//         clearInterval(intervalId);
+//         }
+//     }
