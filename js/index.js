@@ -1,115 +1,4 @@
 
-
-let globalData = null;
-
-
-// loading Speaner
-
-// const loadingSpeaner = () => {
-//     document.getElementById('spinner').classList.remove('hidden')
-
-//     setTimeout(() => {
-//         controlAllCard()
-//     }, 2000)
-// }
-
-// loadingSpeaner()
-
-
-    // step 13 sort price
-    const petsPrice = document.getElementById('pricePets')
-
-    document.getElementById('sortBtn').addEventListener('click', () => {
-
-        const petsDisplay = globalData.pets
-
-        petsDisplay.sort(function(a, b){
-           if(a.price > b.price){
-            return -1;
-           }
-           if(a.price < b.price){
-            return 1;
-           }
-           else{
-            return 0;
-           }
-
-        });
-
-        decendingDisplay(petsDisplay)
-    })
-
-    const decendingDisplay = (decending) =>{
-        const petContainer = document.getElementById('grid-Card-1')
-        petContainer.innerText = "";
-
-        decending.forEach ((pet) => {
-    
-
-            const card = document.createElement('div')
-            card.classList = "card border shadow-xl"
-            card.innerHTML = `
-    
-                <figure class="h-[220px] px-8 pt-8">
-                    <img src="${pet.image}" alt="pets" class="rounded-xl h-full w-full object-cover"/>
-                </figure>
-    
-                <div class="px-8 py-4">
-                    <h2 class="card-title text-xl font-extrabold mb-6">${pet.pet_name}</h2>
-    
-                    <div class="mb-6">
-    
-                        <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=2905&format=png"><p>Breed : ${ pet.breed ? pet.breed : 'Not Available' }</p></span>
-    
-                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>Birth : ${ pet.date_of_birth ? pet.date_of_birth : 'Not Available'}</p></span>
-                       
-                        <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=6vWA99ikHpCe&format=png"><p>Gender : ${ pet.gender ?  pet.gender : 'Not Available'}</p></span>
-    
-                        <span id="petsPrice" class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=85782&format=png"><p>Price : ${ pet.price ? pet.price + "$": 'Not Available'}</p></span> 
-    
-                    </div>              
-                    
-                    <div class="flex justify-between items-center gap-3 border-t">
-                        <div class="card-actions ">
-                            <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-4 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
-                        </div>
-    
-                        <div class="card-actions ">
-                            <button onclick="adoptModal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
-                        </div>
-    
-                        <div class="card-actions ">
-                            <button onclick="loadmodal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
-                        </div>
-    
-                    </div>
-                </div>
-    
-            `
-    
-            petContainer.append(card) 
-    
-        })
-        
-    }
-
-
-//     // loading Speaner
-
-// const spinner = () => {
-//     console.log('rony');
-//     document.getElementById('spinner').style.display ='none'
-// }
-
-// const loadingSpeaner = () => {
-//     document.getElementById('spinner').style.display ='block'
-//     setTimeout(function(){
-//         spinner()
-//     },3000)
-// }
-
-
-
 //step 1
 // fetch load category button
 // create load categories 
@@ -122,15 +11,6 @@ const loadCategories = async() => {
     
     displayCategories(data.categories);
 }
-
-const removeActiveClass = () => {
-    const buttons = document.getElementsByClassName('category-btn')
-    for(let btn of buttons){
-        btn.classList.remove('active')
-    }
-    
-}
-
 
 // step 2
 
@@ -158,6 +38,45 @@ const displayCategories = (categories) => {
     })
 }
 
+// step 5
+const loadCategory = async(id) => {
+
+    document.getElementById('spinner').style.display = 'block' 
+
+    // const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    // const data = await res.json();
+    // displayAllPets(data.data);
+
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then(res => res.json())
+    .then(data => {
+        removeActiveClass()
+
+        const activeBtn = document.getElementById(`button-${id}`)
+        activeBtn.classList.add('active')
+        
+        const petContainer = document.getElementById('grid-Card-1')
+        // petContainer.style.display = 'none'
+        petContainer.innerHTML = "";
+
+        setTimeout( function (){
+            // petContainer.style.display = 'grid'
+            displayAllPets(data.data)
+        }, 2000)
+        
+    })
+
+    .catch((error) => console.log(error))
+}
+
+
+const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName('category-btn')
+    for(let btn of buttons){
+        btn.classList.remove('active')
+    }    
+}
+
 
 // step 3
 const loadAllPets = async() => {
@@ -172,24 +91,11 @@ const loadAllPets = async() => {
 }
 
 
-
 // step 4
 
-// const obj = {
-//     "petId": 1,
-//     "breed": "Golden Retriever",
-//     "category": "Dog",
-//     "date_of_birth": "2023-01-15",
-//     "price": 1200,
-//     "image": "https://i.ibb.co.com/p0w744T/pet-1.jpg",
-//     "gender": "Male",
-//     "pet_details": "This friendly male Golden Retriever is energetic and loyal, making him a perfect companion for families. Born on January 15, 2023, he enjoys playing outdoors and is especially great with children. Fully vaccinated, he's ready to join your family and bring endless joy. Priced at $1200, he offers love, loyalty, and a lively spirit for those seeking a playful yet gentle dog.",
-//     "vaccinated_status": "Fully",
-//     "pet_name": "Sunny"
-// }
-
-
 const displayAllPets = (allPets) => {
+
+    document.getElementById('spinner').style.display = 'none' 
 
     const petContainer = document.getElementById('grid-Card-1')
     petContainer.innerText = "";
@@ -264,27 +170,6 @@ const displayAllPets = (allPets) => {
     
 }
 
-// step 5
-const loadCategory = async(id) => {
-
-    
-    // const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    // const data = await res.json();
-    // displayAllPets(data.data);
-
-    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    .then(res => res.json())
-    .then(data => {
-        removeActiveClass()
-
-        const activeBtn = document.getElementById(`button-${id}`)
-        activeBtn.classList.add('active')
-        
-        displayAllPets(data.data)
-    })
-    .catch((error) => console.log(error))
-    
-}
 
 
 
@@ -375,7 +260,7 @@ const loadPetDetails = async (petId) => {
     }
 
 
-    // // step 11
+    // step 11
 
     const displayAdoptModals = (petModal) => {
         // let countdown = 4; 
@@ -414,6 +299,94 @@ const loadPetDetails = async (petId) => {
     }
 
 
+     // step 13 sort price
+
+     document.getElementById('sortBtn').addEventListener('click', () => {
+ 
+         document.getElementById('spinner').style.display = 'block'   
+         
+         const petsDisplay = globalData.pets
+ 
+         petsDisplay.sort(function(a, b){
+            if(a.price > b.price){
+             return -1;
+            }
+            if(a.price < b.price){
+             return 1;
+            }
+            else{
+             return 0;
+            }
+ 
+         });
+ 
+         setTimeout( function (){
+             decendingDisplay(petsDisplay)
+         }, 2000)
+ 
+     })
+
+     // step 14 
+ 
+     const decendingDisplay = (decending) =>{
+ 
+         document.getElementById('spinner').style.display = 'none'
+ 
+         const petContainer = document.getElementById('grid-Card-1')
+         petContainer.innerText = "";
+         console.log(decending);
+         
+ 
+         decending.forEach ((pet) => {
+ 
+ 
+             const card = document.createElement('div')
+             card.classList = "card border shadow-xl"
+             card.innerHTML = `
+     
+                 <figure class="h-[220px] px-8 pt-8">
+                     <img src="${pet.image}" alt="pets" class="rounded-xl h-full w-full object-cover"/>
+                 </figure>
+     
+                 <div class="px-8 py-4">
+                     <h2 class="card-title text-xl font-extrabold mb-6">${pet.pet_name}</h2>
+     
+                     <div class="mb-6">
+     
+                         <span class="flex items-center gap-3"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=2905&format=png"><p>Breed : ${ pet.breed ? pet.breed : 'Not Available' }</p></span>
+     
+                         <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=50&id=60611&format=png"><p>Birth : ${ pet.date_of_birth ? pet.date_of_birth : 'Not Available'}</p></span>
+                        
+                         <span class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=6vWA99ikHpCe&format=png"><p>Gender : ${ pet.gender ?  pet.gender : 'Not Available'}</p></span>
+     
+                         <span id="petsPrice" class="flex items-center gap-3 mt-2"><img class="h-5 w-5" src="https://img.icons8.com/?size=24&id=85782&format=png"><p>Price : ${ pet.price ? pet.price + "$": 'Not Available'}</p></span> 
+     
+                     </div>              
+                     
+                     <div class="flex justify-between items-center gap-3 border-t">
+                         <div class="card-actions ">
+                             <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-4 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
+                         </div>
+     
+                         <div class="card-actions ">
+                             <button onclick="adoptModal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                         </div>
+     
+                         <div class="card-actions ">
+                             <button onclick="loadmodal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
+                         </div>
+     
+                     </div>
+                 </div>
+     
+             `
+     
+             petContainer.append(card) 
+     
+         })
+         
+     }
+ 
 
 
    
