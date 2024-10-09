@@ -117,7 +117,7 @@ const displayAllPets = (allPets) => {
         return;
     }
     else{
-        petContainer.classList.add('grid')
+        petContainer.classList.add("grid")
     }
 
     allPets.forEach ((pet) => {
@@ -199,7 +199,7 @@ const loadPetDetails = async (petId) => {
         detailsContainer.append(div)
     }
 
-    // step 8 pet modals
+    // step 8 pet modals details
 
     const loadmodal = async (petId) => {
 
@@ -210,7 +210,7 @@ const loadPetDetails = async (petId) => {
 
 
 
-    // step 9 pet modals
+    // step 9 pet modals details
 
     const displayModals = (petModal) => {
 
@@ -250,7 +250,7 @@ const loadPetDetails = async (petId) => {
 
 
 
-    // step 10
+    // step 10 Adopt Modals
 
     const adoptModal = async (petId) => {
 
@@ -260,7 +260,7 @@ const loadPetDetails = async (petId) => {
     }
 
 
-    // step 11
+    // step 11 Adopt Modals
 
     const displayAdoptModals = (petModal) => {
         // let countdown = 4; 
