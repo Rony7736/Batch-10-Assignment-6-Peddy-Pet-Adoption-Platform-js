@@ -396,7 +396,6 @@ const loadPetDetails = async (petId) => {
      }
  
 
-
 loadCategories ()
 
 loadAllPets()
