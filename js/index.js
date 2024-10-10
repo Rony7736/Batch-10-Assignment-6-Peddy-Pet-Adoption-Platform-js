@@ -24,7 +24,7 @@ const displayCategories = (categories) => {
 
         button.innerHTML = `
         
-        <button id="button-${item.category}" onclick="loadCategory('${item.category}')" class="btn flex items-center justify-center gap-4 lg:px-28 h-16 lg:h-24 text-2xl font-bold rounded-2xl category-btn">
+        <button id="button-${item.category}" onclick="loadCategory('${item.category}')" class="btn flex items-center justify-center gap-4 w-52 lg:w-56 mx-auto h-16 lg:h-24 text-2xl font-bold rounded-2xl category-btn">
             <img class="w-10 h-10" src="${item.category_icon}">
             <p>${item.category}</p>
 
@@ -146,17 +146,17 @@ const displayAllPets = (allPets) => {
 
                 </div>              
                 
-                <div class="flex justify-between items-center gap-3 border-t">
+                <div class="flex justify-between items-center gap-2 border-t">
                     <div class="card-actions ">
-                        <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-4 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
+                        <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-3 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
                     </div>
 
                     <div class="card-actions ">
-                        <button onclick="adoptModal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                        <button onclick="adoptModal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
                     </div>
 
                     <div class="card-actions ">
-                        <button onclick="loadmodal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
+                        <button onclick="loadmodal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Details</button>
                     </div>
 
                 </div>
@@ -363,17 +363,17 @@ const loadPetDetails = async (petId) => {
      
                      </div>              
                      
-                     <div class="flex justify-between items-center gap-3 border-t">
+                     <div class="flex justify-between items-center gap-1 border-t">
                          <div class="card-actions ">
-                             <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-4 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
+                             <button onclick="loadPetDetails('${pet.petId}')" class="btn mt-3 px-3 py-2 rounded-xl border"><img class="w-6 h-6" src="https://img.icons8.com/?size=80&id=114072&format=png"></button>
                          </div>
      
                          <div class="card-actions ">
-                             <button onclick="adoptModal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                             <button onclick="adoptModal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
                          </div>
      
                          <div class="card-actions ">
-                             <button onclick="loadmodal('${pet.petId}')" class="btn px-6 py-3 mt-3 rounded-xl border font-bold"">Details</button>
+                             <button onclick="loadmodal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Details</button>
                          </div>
      
                      </div>

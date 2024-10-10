@@ -76,14 +76,14 @@
   <header class="w-11/12 mx-auto">
     <!-- Nav Section -->
       <section>
-        <nav class="w-11/12 mx-auto py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b">
+        <nav class="w-11/12 mx-auto py-3 flex justify-between items-center gap-4 border-b">
 
           <div class="flex items-center gap-2 w-[100px]">
               <img src="./images/logo.webp" alt="">
               <h4 class="font-extrabold text-2xl">Peddy</h4>
           </div>
 
-          <div class="">
+          <div class="hidden md:block">
               <ul class="flex items-center gap-12">
                 <li><a href="">Home</a></li>
                 <li><a href="">Shop</a></li>
@@ -91,11 +91,23 @@
               </ul>
           </div>
               
-          <div class="sort border p-4 rounded-full">
+          <div class="sort border p-4 rounded-full hidden md:block">
               <img class= "w-8 h-8" src="https://img.icons8.com/?size=32&id=22396&format=png" alt="">
           </div>
 
+          <div class="dropdown md:hidden">
+            <div tabindex="0" role="button" class="btn btn-ghost">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-lg font-medium right-0 gap-2">
+                <li><a href="">Home</a></li>
+                <li><a href="">Shop</a></li>
+                <li><a href="">Contact</a></li>      
+            </ul>
+          </div>
+
       </nav>
+     
       </section>
 
     <!-- Banner Section -->
@@ -127,7 +139,8 @@
       </div>
 
       <!-- 4 card section -->
-      <div id="categoryButtons" class="flex flex-col mx-24 lg:mx-0 lg:flex-row lg:justify-evenly gap-5">
+      <!-- <div id="categoryButtons" class="flex flex-col mx-24 lg:mx-0 lg:flex-row lg:justify-evenly gap-5"> -->
+      <div id="categoryButtons" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md::mx-20 gap-5">
 
       </div>
 
@@ -142,7 +155,7 @@
     <div id="spinner"></div>
     <section id="" class="flex flex-col lg:flex-row gap-6">
 
-      <div id="grid-Card-1" class="lg:w-8/12 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-5 py-6 border rounded-2xl p-4 my-6 shadow-xl">
+      <div id="grid-Card-1" class="lg:w-8/12 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 py-6 border rounded-2xl p-4 my-6 shadow-xl">
 
       </div>
       
