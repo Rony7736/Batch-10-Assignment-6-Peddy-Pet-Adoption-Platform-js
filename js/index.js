@@ -152,7 +152,7 @@ const displayAllPets = (allPets) => {
                     </div>
 
                     <div class="card-actions ">
-                        <button onclick="adoptModal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                        <button id="adoptBtn-${pet.petId}" onclick="adoptModal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
                     </div>
 
                     <div class="card-actions ">
@@ -254,15 +254,16 @@ const loadPetDetails = async (petId) => {
 
     const adoptModal = async (petId) => {
 
+
         const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
         const data = await res.json()
-        displayAdoptModals(data.petData);
+        displayAdoptModals(data.petData, petId);
     }
 
 
     // step 11 Adopt Modals
 
-    const displayAdoptModals = (petModal) => {
+    const displayAdoptModals = (petModal, petId) => {
         // let countdown = 4; 
 
           const adoptContainer = document.getElementById('adopt-modal-content')
@@ -283,6 +284,9 @@ const loadPetDetails = async (petId) => {
 
         const showModal = document.getElementById('adoptModal').showModal()
 
+        // adopt button id
+        const adoptBtn = document.getElementById('adoptBtn-' + petId)
+
         let countdown = 4; 
         const intervalId = setInterval(() => {
             countdown --;
@@ -292,6 +296,10 @@ const loadPetDetails = async (petId) => {
             if(countdown <= 0){
                 clearInterval(intervalId);
                 document.getElementById('adoptModal').close()
+
+                adoptBtn.innerText = "Adoped"
+                adoptBtn.setAttribute('disabled', true)
+                
                 return;
             }
           }, 1000);
@@ -369,7 +377,7 @@ const loadPetDetails = async (petId) => {
                          </div>
      
                          <div class="card-actions ">
-                             <button onclick="adoptModal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
+                             <button id="adoptBtn-${pet.petId}" onclick="adoptModal('${pet.petId}')" class="btn px-3 py-3 mt-3 rounded-xl border font-bold"">Adopt</button>
                          </div>
      
                          <div class="card-actions ">
@@ -387,9 +395,6 @@ const loadPetDetails = async (petId) => {
          
      }
  
-
-
-   
 
 
 loadCategories ()
